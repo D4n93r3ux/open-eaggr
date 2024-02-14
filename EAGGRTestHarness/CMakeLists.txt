@@ -1,10 +1,12 @@
+set(TEST_HARNESS_NAME eaggr_test_harness)
+
 file(
     GLOB_RECURSE
     EAGGR_TEST_HARNESS_SOURCES
     **.cpp
     **.cc)
 
-add_executable(eaggr_test_harness ${EAGGR_TEST_HARNESS_SOURCES})
+add_executable(${TEST_HARNESS_NAME} ${EAGGR_TEST_HARNESS_SOURCES})
 
 set(TEST_DATA_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/TestData)
 set(TEST_DATA_DESTINATION_DIR
@@ -13,10 +15,10 @@ set(TEST_DATA_DESTINATION_DIR
 file(COPY ${TEST_DATA_SOURCE_DIR} DESTINATION ${TEST_DATA_DESTINATION_DIR})
 
 target_include_directories(
-    eaggr_test_harness
+    ${TEST_HARNESS_NAME}
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
            ${CMAKE_CURRENT_SOURCE_DIR}/3rdParty
            ${CMAKE_SOURCE_DIR}/EAGGR
            ${CMAKE_SOURCE_DIR}/EAGGR/3rdParty/include)
 
-target_link_libraries(eaggr_test_harness PUBLIC eaggr PROJ::proj)
+target_link_libraries(${TEST_HARNESS_NAME} PUBLIC eaggr PROJ::proj)
